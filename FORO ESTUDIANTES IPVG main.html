@@ -1,26 +1,41 @@
 <!DOCTYPE html>
 <html lang="es">
-
-<style>
-	.mi-navbar {
-	  background-color: #ff5733 !important;
-}
-</style>
-
-
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>FORO ESTUDIANTES IPVG</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
-<section1>
-	<nav class="navbar bg-body-tertiary" style="background-color: #0C1740 !important">
-  <div class="container">
-    <a class="navbar-brand"  href="#">
-      <img src="https://intranet.virginiogomez.cl/intranet/galeria/logos_vg/Logo_VG_color.png" alt="IPVG" width="30" height="24" >
-    </a>
-  </div>
-</nav>
-	
-</section>
+<body>
+
+    <header>
+        <nav class="navbar navbar-expand-lg navbar-dark" style="background-color: #0b1466 !important;">
+            <div class="container-fluid" id="BarraDeNavegacion">
+                <a class="navbar-brand d-flex align-items-center gap-2 " href="#">
+                    <img src="https://intranet.virginiogomez.cl/intranet/galeria/logos_vg/Logo_VG_blanco.png" alt="Logo" width="200" height="50">
+                    <span style="font-family: Arial; font: bold;">FORO IPVG</span>
+                </a>
+
+                <button class="navbar-toggler col-12 col-md-12 col-lg-12" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContenido" aria-controls="navbarContenido" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarContenido">
+                    
+                    <form class="d-flex flex-grow-1 mx-lg-4 my-2 my-lg-0" role="search">
+                        <input class="form-control me-2" type="search" placeholder="Buscar en el foro..." aria-label="Search">
+                        <button class="btn btn-outline-light" type="submit">Buscar</button>
+                    </form>
+
+                    <div class="d-flex">
+                        <button class="btn btn-primary text-nowrap col-12 col-md-12 col-lg-12">Crear hilo</b>
+                    </div>
+
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
