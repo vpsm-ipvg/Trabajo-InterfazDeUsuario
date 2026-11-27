@@ -37,7 +37,7 @@
 - [x] Responder hilos (RF-03)
 - [x] Buscador por palabras clave (RF-04)
 - [x] Modo claro / oscuro guardado en `localStorage` (RF-06)
-- [ ] Mensajes de hilos y respuestas con mínimo 10 y máximo 250 caracteres (`minlength` / `maxlength`), validado también en `js/foro.js` (RF-02, RF-03)
+- [x] Mensajes de hilos y respuestas con mínimo 10 y máximo 250 caracteres (`minlength` / `maxlength`), validado también en `js/foro.js` (RF-02, RF-03)
 - [ ] Botón "Responder" debajo de cada hilo, no solo dentro del modal (RF-03)
 - [ ] Hilos colapsados por defecto, con triángulo `v` / `>` para ver u ocultar las respuestas
 - [ ] Botón flotante circular de mensaje con `+` abajo a la izquierda para crear hilo
@@ -55,6 +55,6 @@
 - [ ] Revisar contraste de colores
 
 ### Entrega
-- [ ] README completo: descripción, cómo ejecutarlo, integrantes y roles
-- [ ] Ramas y Pull Requests con aporte de cada integrante
+- [x] README completo: descripción, cómo ejecutarlo, integrantes y roles
+- [x] Ramas y Pull Requests con aporte de cada integrante
 - [ ] Demo en vivo y defensa
