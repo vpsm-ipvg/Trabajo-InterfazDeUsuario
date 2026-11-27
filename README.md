@@ -9,3 +9,9 @@
 | Valentina Santander  | Programadora  |
 | Thomas Villagran  | Programador principal  |
 | Justin Cifuentes  | Proyect owner  |
+
+# Procesos en desarrollo
+- [x] Pagina de Log In (Invitado)
+- [x] Pagina de Main 
+- [ ] Código Javascript Listo
+- [ ] Responsividad a diferentes dispositivos lista
