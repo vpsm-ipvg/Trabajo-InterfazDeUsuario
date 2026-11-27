@@ -1,24 +1,27 @@
-///// Guardar rol de los usuarios y permitir ingresar al foro
+///// Guardar el rol y permitir entrar al foro.
 function iniciarSesion(rol) {
     localStorage.setItem('rolUsuario', rol);
     window.location.href = 'FORO ESTUDIANTES IPVG main.html';
 }
 
-///// Cambiar el tema de la pagina
+///// 
 document.addEventListener('DOMContentLoaded', function () {
     const formulario = document.getElementById('formCrearHilo');
     const modalCrearElemento = document.getElementById('modalCrearHilo');
     const contenedorHilos = document.getElementById('listaHilos');
     const botonTema = document.getElementById('btnCambiarTema');
+    const formularioBusqueda = document.getElementById('formularioBusqueda');
+    const buscadorHilos = document.getElementById('buscadorHilos');
+    let palabraBuscada = '';
 
 ///// Aplicar y recordar el tema elegido.
-    function aplicarTema(tema) {
-        document.documentElement.setAttribute('data-bs-theme', tema);
-        localStorage.setItem('temaForo', tema);
-        if (botonTema) {
-            botonTema.textContent = '◐';
-            botonTema.title = tema === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro';
-            botonTema.setAttribute('aria-label', botonTema.title);
+function aplicarTema(tema) {
+    document.documentElement.setAttribute('data-bs-theme', tema);
+    localStorage.setItem('temaForo', tema);
+    if (botonTema) {
+        botonTema.textContent = '◐';
+        botonTema.title = tema === 'dark' ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro';
+        botonTema.setAttribute('aria-label', botonTema.title);
         }
     }
     aplicarTema(localStorage.getItem('temaForo') || 'light');
@@ -29,7 +32,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    ///// Evitar que los elementos del main se ejecuten en el login
+///// Evitar que los elementos del main se ejecuten en el login
     if (!contenedorHilos) return;
 
     const modalCrear = modalCrearElemento && window.bootstrap
@@ -64,8 +67,26 @@ document.addEventListener('DOMContentLoaded', function () {
         return elemento;
     }
 
-    ///// Mostrar los hilos en la página principal
+///// Normaliza texto para que la búsqueda ignore mayúsculas y tildes
+    function normalizarTexto(texto) {
+        return String(texto || '')
+            .toLocaleLowerCase('es')
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '');
+    }
 
+///// Comprobar si una palabra aparece en algún dato del hilo o sus respuestas
+    function coincideConBusqueda(hilo, termino) {
+        const respuestas = Array.isArray(hilo.respuestas)
+            ? hilo.respuestas.map(function (respuesta) { return respuesta.texto || ''; }).join(' ')
+            : '';
+        const contenidoBuscable = [
+            hilo.titulo, hilo.autor, hilo.categoria, hilo.contenido, respuestas
+        ].join(' ');
+        return normalizarTexto(contenidoBuscable).includes(termino);
+    }
+
+///// Dibuja primero los hilos que coinciden con la búsqueda y luego los demás.
     function mostrarHilosEnMain() {
         const hilos = obtenerHilos();
         contenedorHilos.replaceChildren();
@@ -77,8 +98,29 @@ document.addEventListener('DOMContentLoaded', function () {
             return;
         }
 
-        hilos.forEach(function (hilo, indice) {
-            const tarjeta = crearElemento('article', 'card mb-3 shadow-sm');
+        const termino = normalizarTexto(palabraBuscada.trim());
+        const hilosOrdenados = hilos.map(function (hilo, indice) {
+            return { hilo: hilo, indice: indice, coincide: termino ? coincideConBusqueda(hilo, termino) : false };
+        });
+
+        if (termino) {
+            hilosOrdenados.sort(function (a, b) {
+                return Number(b.coincide) - Number(a.coincide);
+            });
+
+            const cantidadCoincidencias = hilosOrdenados.filter(function (item) { return item.coincide; }).length;
+            const aviso = crearElemento('p', 'text-body-secondary small mb-3',
+                cantidadCoincidencias + (cantidadCoincidencias === 1
+                    ? ' hilo coincide con «' + palabraBuscada.trim() + '». '
+                    : ' hilos coinciden con «' + palabraBuscada.trim() + '». ')
+                + 'Los resultados que tengan coincidencias con tu busqueda apareceran primero. Para eliminar los filtros, presiona la << X >> del buscador.');
+            contenedorHilos.appendChild(aviso);
+        }
+
+        hilosOrdenados.forEach(function (item) {
+            const hilo = item.hilo;
+            const indice = item.indice;
+            const tarjeta = crearElemento('article', 'card mb-3 shadow-sm' + (item.coincide ? ' border-primary' : ''));
             const cuerpo = crearElemento('div', 'card-body');
             const titulo = crearElemento('h5', 'card-title', hilo.titulo || 'Hilo sin título');
             const autor = crearElemento('small', 'text-body-secondary d-block mb-2',
@@ -94,13 +136,34 @@ document.addEventListener('DOMContentLoaded', function () {
                 abrirHilo(indice);
             });
 
+            if (item.coincide) {
+                const etiqueta = crearElemento('span', 'badge text-bg-success ms-2', 'Coincidencia');
+                titulo.appendChild(etiqueta);
+            }
             cuerpo.append(titulo, autor, categoria, contenido, fecha, botonAbrir);
             tarjeta.appendChild(cuerpo);
             contenedorHilos.appendChild(tarjeta);
         });
     }
 
-    ///// Abrir la ventana flotante del hilo seleccionado.
+///// La búsqueda funciona tanto con el botón como al presionar Enter.
+    if (formularioBusqueda && buscadorHilos) {
+        formularioBusqueda.addEventListener('submit', function (evento) {
+            evento.preventDefault();
+            palabraBuscada = buscadorHilos.value;
+            mostrarHilosEnMain();
+        });
+
+///// Si se borra el campo, vuelve inmediatamente al orden normal.
+        buscadorHilos.addEventListener('input', function () {
+            if (buscadorHilos.value.trim() === '') {
+                palabraBuscada = '';
+                mostrarHilosEnMain();
+            }
+        });
+    }
+
+///// Abre la ventana flotante del hilo seleccionado.
     function abrirHilo(indice) {
         const hilos = obtenerHilos();
         const hilo = hilos[indice];
@@ -138,7 +201,7 @@ document.addEventListener('DOMContentLoaded', function () {
         modalVer.show();
     }
 
-    //// Crear y guardar un nuevo hilo.
+///// Crear y guardar un nuevo hilo.
     if (formulario) {
         formulario.addEventListener('submit', function (evento) {
             evento.preventDefault();
@@ -171,7 +234,7 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    //// Publicar una respuesta en el hilo abierto.
+///// Publicar una respuesta en el hilo abierto
     if (formularioRespuesta) {
         formularioRespuesta.addEventListener('submit', function (evento) {
             evento.preventDefault();
