@@ -11,7 +11,7 @@
         }
     </style>
 </head>
-<body class="bg-body text-body">
+<body class="bg-body text-body d-flex flex-column min-vh-100">
     <header>
         <nav class="navbar navbar-expand-lg navbar-dark p-3" style="background-color:#0b1466 !important;">
             <div class="container-fluid" id="BarraDeNavegacion">
@@ -38,9 +38,10 @@
         </nav>
     </header>
 
-    <main class="container py-4">
+    <main class="container py-4 flex-grow-1 d-flex flex-column">
         <h2 class="mb-4">Hilos del foro</h2>
         <section id="listaHilos" aria-live="polite"></section>
+        <div id="paginacionHilos" class="btn-toolbar justify-content-center mt-auto pt-4"></div>
     </main>
 
     <div class="modal fade" id="modalCrearHilo" tabindex="-1" aria-labelledby="tituloModalHilo" aria-hidden="true">
@@ -58,6 +59,22 @@
                                    placeholder="Ej.: Estudiante IPVG">
                             <div class="form-text">Si lo dejas vacío, tu publicación aparecerá como "Invitado".</div>
                         </div>
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="edadHilo" class="form-label">Edad (opcional)</label>
+                                <input type="number" class="form-control" id="edadHilo" min="15" max="99" placeholder="Ej.: 20">
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="pronombreHilo" class="form-label">Pronombre (opcional)</label>
+                                <input type="text" class="form-control" id="pronombreHilo" maxlength="20" placeholder="Ej.: Él, Ella, Elle">
+                            </div>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="publicoHilo" checked>
+                            <label class="form-check-label" for="publicoHilo">
+                                Hacer hilo público (aparecerá en el feed general; si lo desmarcas, solo se verá al filtrar)
+                            </label>
+                        </div>
                         <div class="mb-3">
                             <label for="tituloHilo" class="form-label">Título del hilo</label>
                             <input type="text" class="form-control" id="tituloHilo" maxlength="120" placeholder="Escribe el título de tu publicación" required>
@@ -73,8 +90,8 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="contenidoHilo" class="form-label">Contenido</label>
-                            <textarea class="form-control" id="contenidoHilo" rows="5" placeholder="Escribe aquí el contenido de tu hilo..." required></textarea>
+                            <label for="contenidoHilo"  class="form-label" >Contenido</label>
+                            <textarea class="form-control" minlength="10" maxlength="250" id="contenidoHilo" rows="5" placeholder="Escribe aquí el contenido de tu hilo..." required></textarea>
                         </div>
                         <div class="d-flex justify-content-end gap-2">
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
@@ -104,7 +121,7 @@
                     <div id="listaRespuestas" class="mb-3"></div>
                     <form id="formResponderHilo">
                         <label for="textoRespuesta" class="form-label">Escribe tu respuesta</label>
-                        <textarea id="textoRespuesta" class="form-control mb-3" rows="3" placeholder="Comparte tu opinión..." required></textarea>
+                        <textarea id="textoRespuesta" minlength="10" maxlength="250" class="form-control mb-3" rows="3" placeholder="Comparte tu opinión..." required></textarea>
                         <button type="submit" class="btn btn-primary">Publicar respuesta</button>
                     </form>
                 </div>
@@ -112,5 +129,9 @@
         </div>
     </div>
 
+    <footer class="" style="text-align: center; background-color: #0b1466 !important; color: whitesmoke; margin: 0;">
+        <button class="btn btn-outline-light m-3 col-lg-2 col-md-12 col-12 rounded-5" style="place-items: right;" onclick="contactanos('invitado')"> CONTACTANOS! </button>
+        Derechos Reservados al INSTITUTO PROFESIONAL VIRGINIO GOMEZ DE LA UNIVERSIDAD DE CONCEPCIÓN
+    </footer>
 </body>
 </html>

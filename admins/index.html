@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title> Contacto Desarrolladores</title>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+<style>
+	* {
+font-family: Arial;
+	}
+
+</style>
+</head>
+<body>
+
+<div class="card m-4">
+
+<p class="h2 m-2" style="text-align: center;"> Hola! Somos los dueños del foro IPVG, aqui estan nuestros contactos por si quieres consultarnos algo!</p>
+
+
+<div class="card m-4">
+	<p class="h4"> Programador N°1 - Thomas Villagran</p>
+	<p> Contacto: <a href="mailto:thomas.villagran@virginiogomez.cl">thomas.villagran@virginiogomez.cl</a></p>
+
+</div>
+<div class="card m-4">
+	<p class="h4"> Programador N°2 - Valentina Santander  </p>
+	<p> Contacto: <a href="mailto:valentina.santander@virginiogomez.cl">valentina.santander@virginiogomez.cl</a></p>
+
+</div>
+<div class="card m-4">
+	<p class="h4"> Proyect Owner | Programador N°3 - Justin Cifuentes </p>
+	<p> Contacto: <a href="mailto:justin.cifuentes@virginiogomez.cl">justin.cifuentes@virginiogomez.cl</a></p>
+
+</div>
+
+            <section id="AdminMailbox" class="m-3">
+                <h2 id="tituloAdminMailbox" class="h4 mb-2">AdminMailbox — Buzón de Sugerencias y Reclamos</h2>
+                <p class="text-body-secondary small mb-3">
+                    ¿Quieres proponer una nueva categoría temática o reportar un problema visual en el sitio? Envíanos tu mensaje de forma anónima.
+                </p>
+
+                <div id="alertaMailbox" class="alert alert-success d-none" role="alert">
+                    ¡Tu mensaje fue enviado al AdminMailbox! Gracias por ayudarnos a mejorar el foro.
+                </div>
+
+                <form id="formAdminMailbox" class="mb-4">
+                    <div class="mb-3">
+                        <label for="tituloMailbox" class="form-label">Título</label>
+                        <input type="text" class="form-control" id="tituloMailbox" maxlength="100" placeholder="Ej.: Agregar categoría de Deportes o sugerencia de colores" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="descripcionMailbox" class="form-label">Descripción</label>
+                        <textarea class="form-control" id="descripcionMailbox" rows="4" minlength="10" maxlength="350" placeholder="Explica con mayor detalle tu sugerencia o reclamo..." required></textarea>
+                    </div>
+                    <div class="d-flex flex-wrap gap-2">
+                        <button type="submit" class="btn text-white" style="background-color:#0b1466;">Enviar al AdminMailbox</button>
+                    </div>
+                </form>
+            </section>
+                    <button class="btn btn-primary m-3" onclick="llevaramain('Invitado')"> Regresar </button>
+        </div>
+
+    </div>
+</div>
+
+    <script src="../js/foro.js"></script>
+</body>
+</html>
