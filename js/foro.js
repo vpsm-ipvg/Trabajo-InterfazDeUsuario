@@ -1,7 +1,7 @@
 ///// Guardar el rol y permitir entrar al foro.
 function iniciarSesion(rol) {
     localStorage.setItem('rolUsuario', rol);
-    window.location.href = 'FORO ESTUDIANTES IPVG main.html';
+    window.location.href = '../index.html';
 }
 
 ///// 
