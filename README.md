@@ -17,7 +17,7 @@
    ```bash
    git clone https://github.com/vpsm-ipvg/Trabajo-InterfazDeUsuario.git
    ```
-2. Abre la carpeta en **Visual Studio Code**.
+2. Abre la carpeta en tu editor de código favorito (Sublime Text, Visual Studio Code, etc.)
 3. Abre el archivo `index.html` en tu navegador (o usa la extensión **Live Server**).
 
 
