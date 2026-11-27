@@ -60,7 +60,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="tituloHilo" class="form-label">Título del hilo</label>
-                            <input type="text" class="form-control" id="tituloHilo" maxlength="120" placeholder="Escribe el título de tu publicación" required>
+                            <textarea class="form-control" id="contenidoHilo" rows="5" minlength="10" maxlength="250" placeholder="Escribe aquí el contenido de tu hilo..." required></textarea>
                         </div>
                         <div class="mb-3">
                             <label for="categoriaHilo" class="form-label">Categoría</label>
@@ -90,11 +90,11 @@
     <script src="js/foro.js"></script>
 
     <!-- Ventana flotante para ver un hilo y responder -->
-    <div class="modal fade" id="modalVerHilo" tabindex="-1" aria-labelledby="tituloModalHilo" aria-hidden="true">
+    <div class="modal fade" id="modalVerHilo" tabindex="-1" aria-labelledby="tituloModalVerHilo" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered modal-lg modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="tituloModalHilo">Hilo del foro</h5>
+                    <h5 class="modal-title" id="tituloModalVerHilo">Hilo del foro</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar"></button>
                 </div>
                 <div class="modal-body">
