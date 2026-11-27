@@ -218,6 +218,11 @@ function aplicarTema(tema) {
                 return;
             }
 
+            if (contenido.length < 10 || contenido.length > 250) {
+                alert('El contenido del hilo debe tener entre 10 y 250 caracteres.');
+                return;
+            }
+            
             const hilos = obtenerHilos();
             hilos.unshift({
                 titulo: titulo,
@@ -240,7 +245,12 @@ function aplicarTema(tema) {
             evento.preventDefault();
             const texto = campoRespuesta ? campoRespuesta.value.trim() : '';
             if (!texto || indiceHiloAbierto === null) return;
-
+            
+            if (texto.length < 10 || texto.length > 250) {
+                alert('La respuesta debe tener entre 10 y 250 caracteres.');
+                return;
+            }
+            
             const hilos = obtenerHilos();
             const hilo = hilos[indiceHiloAbierto];
             if (!hilo) return;
